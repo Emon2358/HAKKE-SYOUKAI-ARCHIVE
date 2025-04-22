@@ -1,0 +1,30 @@
+# .github/workflows/download_ram.yml
+name: Download and Commit RAM File
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Download .ram file
+        run: python download_ram.py
+
+      - name: Commit and Push
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: github-actions[bot]
+          author_email: github-actions[bot]@users.noreply.github.com
+          message: 'chore: update hakkelive9911.ram'
+          add: 'hakkelive9911.ram'
