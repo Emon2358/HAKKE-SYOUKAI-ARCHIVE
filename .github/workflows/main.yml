@@ -1,5 +1,5 @@
-# .github/workflows/download_ram.yml
-name: Download and Commit RAM File
+# .github/workflows/download_bbs_logs.yml
+name: Scrape HAKKE CD-R BBS Logs
 
 on:
   workflow_dispatch:
@@ -18,13 +18,18 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Download .ram file
-        run: python download_ram.py
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install requests beautifulsoup4
 
-      - name: Commit and Push
+      - name: Scrape BBS & save txt
+        run: python download_bbs_logs.py
+
+      - name: Commit and Push logs
         uses: EndBug/add-and-commit@v9
         with:
           author_name: github-actions[bot]
           author_email: github-actions[bot]@users.noreply.github.com
-          message: 'chore: update hakkelive9911.ram'
-          add: 'hakkelive9911.ram'
+          message: 'chore: update HAKKE CD-R BBS logs'
+          add: 'HAKKE SYOUKAI CD-R BBS LOG/*'
