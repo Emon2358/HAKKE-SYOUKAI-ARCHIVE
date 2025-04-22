@@ -27,7 +27,7 @@ jobs:
       - name: Scrape BBS & save txt
         run: python download_bbs_logs.py
 
-      - name: Debug: list generated files
+      - name: Debug
         run: ls -R "HAKKE SYOUKAI CD-R BBS LOG"
 
       - name: Commit & Push changes
